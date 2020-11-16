@@ -73,3 +73,33 @@ void print_Tab_of_DoubleNode(Node* tab, int n){
         printf("\n%c : %d", tab[indexe].letter, tab[indexe].occ);
     }
 }
+
+void swap(DoubleNode** a, DoubleNode** b) {
+    DoubleNode* tmp;
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+// fast sorting technique
+
+void quick_sorting (DoubleNode* tab, int first, int last) {
+    int pivot, i, j;
+    if(first < last) {
+        pivot = first;          //We define the pivot at the beginning
+        i = first;
+        j = last;
+        while (i < j) {
+            while(tab[i].occ <= tab[pivot].occ && i < last)   //We are looking for an element larger than the pivot on the left if it exists.
+                i++;
+            while(tab[j].occ > tab[pivot].occ)   // We are looking for an element smaller than the pivot on the right if it exists
+                j--;
+            if(i < j) {                 //If they exist, we exchange them
+                swap(&tab[i], &tab[j]);
+            }
+        }
+        swap(&tab[pivot], &tab[j]);
+        quick_sorting(tab, first, j - 1);  // This is repeated until the 2 sub-tables are sorted.
+        quick_sorting(tab, j + 1, last);
+    }
+}

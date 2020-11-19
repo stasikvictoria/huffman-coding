@@ -167,10 +167,49 @@ void free_list_n(Element_n* l)
 
 ///***********************Dictionary*****************************
 
-Dictionary* create_dictionary(void){
+Dictionary* create_dictionary_element(void){
     Dictionary* d = (Dictionary*) malloc(sizeof(Dictionary));
-    d->letter = '0';
-    d->code[0] = 1;
+    d->letter = 'a';
+    for (int i = 1; i<8 ; i++){
+        d->code[i] = 0;
+    }
+    d->code[8] = 2;
     d->next = NULL;
     return d;
 }
+
+
+Dictionary* create_dictionary(int size){
+    if (size<0){
+        return NULL;
+    }
+    Dictionary* d = create_dictionary_element();
+    d->next = create_dictionary(size - 1);
+    return d;
+}
+
+
+void print_dictionary(Dictionary* d){
+    int i;
+    if (d != NULL) {
+        printf("\nDictionary : \n");
+        while (d->next != NULL) {
+            printf("%c : ", d->letter);
+            i = 0;
+            while (d->code[i] == 1 || d->code[i] == 0){
+                printf ("%d", d->code[i]);
+                i++;
+            }
+            printf("\n");
+            d = d->next;
+        }
+    }
+}
+
+void free_dictionary(Dictionary* d){
+    if(d != NULL) {
+        free_dictionary(d->next);
+        free(d);
+    }
+}
+

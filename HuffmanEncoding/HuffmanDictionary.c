@@ -102,7 +102,32 @@ void list_remove_element_n(Element_n** l, Node* n){
     }
 }
 
+void list_insert_element_n(Element_n** l, Node* n, int pos){
 
+    Element_n* nx_elem = (Element_n*)malloc(sizeof(Element_n));
+    nx_elem->data = n;
+    nx_elem->next = NULL;
+
+    if((pos <= 1) || (*l == NULL)) {
+        nx_elem->next = *l;
+        *l = nx_elem;
+    }
+    else {
+        Element_n* temp = *l;
+        int size = 2;
+
+        while(temp->next != NULL && size != pos) {
+            temp = temp->next;
+            size ++;
+        }
+        nx_elem->next = temp->next ;
+        temp->next = nx_elem;
+    }
+
+}
+
+
+/*
 Node* return_huffman(Element* l){
     Element_n* list = element_to_element_n(l); // LIST BECOME A LIST WITH NODE
 
@@ -141,55 +166,78 @@ Node* return_huffman(Element* l){
     }
 
 }
+ */
+Node* return_huffman(Element* l){
+    Element_n* list = element_to_element_n(l); // LIST BECOME A LIST WITH NODE
+
+    if (list==NULL){
+        return NULL;
+    }
+    else{ // OTHER CASE
+        while (list->next != NULL){ //WHILE ONLY ONE NODE REMAIN IN THE LIST
+            Node* huffman = create_node(NULL, NULL); //CREATE THE TREE
+            huffman->right=occ_min(list); // TREE FIRST CHILD
+            list_remove_element_n(&list, huffman->right); //REMOVE THE ELEMENT ALREADY IN THE TREE
+            huffman->left=occ_min(list); //TREE SECOND CHILD
+            list_remove_element_n(&list, huffman->left); //REMOVE THE ELEMENT
+            huffman->occ=(huffman->right->occ)+(huffman->left->occ); //HEAD OF TREE TAKE VALUE OF THE SUM OF OCCURENCE OF THE TWO CHILDREN
+            list_insert_element_n(&list, huffman, 1); //ADD THE NEW NODE HUFFMAN TO THE LIST
+        }
+        return (list->data);
+    }
+
+}
 
 //E FONCTION
-void dictionary_from_tree(Node* tree, Dictionary** d, int* code, int* code_index){
+void number_of_leaves(Node* tree, int* leaves){
     if (tree != NULL){
-
-        //VERIFY IF IT'S A LEAF
-        //IF THAT'S A LEAF WE ENTER THE DATA TO THE DICTIONARY STRUCTURE
         if (tree->left == NULL && tree->right == NULL){
-            (*d)->letter = tree->letter;
-            for (int i = 0 ; i<*code_index ; i++){ //or code_index - 1 ???
-                (*d)->code[i] = code[i];
-            }
-            Dictionary* temp = (*d);
-            (*d) = (*d)->next;
-            (*d)->previous = temp;
+            *leaves = 1 + *leaves;
         }
-
-        //WE RUN THROUGH THE HUFFMAN TREE TO SEARCH THE LEAVES
-        //WHILE RUNING WE REGISTER THE CODE IN A TAB
-        code[*code_index] = 0;
-        code_index = code_index + 1;
-        dictionary_from_tree(tree->left, d, code, code_index);
-        code_index = code_index - 1;
-        code[*code_index] = 1;
-        code_index = code_index + 1;
-        dictionary_from_tree(tree->right, d, code, code_index);
+        number_of_leaves(tree->left, leaves);
+        number_of_leaves(tree->right, leaves);
     }
 }
 
-void write_dictionary_in_txt(Node* tree){
 
-    //FIRST WE CREATE THE DICTIONARY FROM THE HUFFMAN TREE
-    Dictionary* d = create_dictionary();
-    int code[8];
-    int code_index = 0;
-    dictionary_from_tree(tree, &d, code, &code_index);
-    while (d->previous != NULL){
-        d = d->previous;
+void dictionary_from_tree(Node* tree, Dictionary** d, int* code, int* code_index){
+    if (tree != NULL){
+        if (tree->left == NULL && tree->right == NULL){
+            code[*code_index] = 2;
+            (*d)->letter = tree->letter;
+            int i = 0;
+
+            while (code[i] != 2) {
+                (*d)->code[i] = code[i];
+                i++;
+            }
+            (*d)->code[i] = 2;
+            (*d) = (*d)->next;
+        }
+        code[*code_index] = 0;
+        *code_index = *code_index + 1;
+        dictionary_from_tree(tree->left, d, code, code_index);
+        *code_index = *code_index - 1;
+        code[*code_index] = 1;
+        *code_index = *code_index + 1;
+        dictionary_from_tree(tree->right, d, code, code_index);
+        *code_index = *code_index - 1;
     }
+}
 
-    //THEN WE WRITE THE DICTIONARY IN THE TXT FILE
+
+void write_dictionary_in_txt(Dictionary* d){
+    int i;
     FILE* file = NULL;
-    file = fopen("dictionary.txt", "w");
+    file = fopen("/Users/victoriastasik/Desktop/HuffmanCoding/dictionary.txt", "w+");
     if (file != NULL)
     {
-        while (d != NULL){
-            fprintf(file, " %c : ", d->letter);
-            for (int i=0 ; i<sizeof(d->code) ; i++){
-                fprintf(file,"%d", d->code[i]);
+        while (d->next != NULL){
+            fprintf(file, "%c : ", d->letter);
+            i = 0;
+            while (d->code[i] == 1 || d->code[i] == 0){
+                fprintf (file,"%d", d->code[i]);
+                i++;
             }
             fprintf(file,"\n");
             d = d->next;
@@ -197,6 +245,11 @@ void write_dictionary_in_txt(Node* tree){
         fclose(file);
     }
 }
+
+
+
+
+
 
 
 

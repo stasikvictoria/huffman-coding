@@ -8,9 +8,9 @@
 
 /Users/victoriastasik/Desktop/HuffmanCoding/DataTypes/DataTypes.h
 
-/Users/victoriastasik/Desktop/HuffmanCoding/OptimisedHuffmanEncoding/CreateHuffmanTree.c
-CreateHuffmanTree.h
-/Users/victoriastasik/Desktop/HuffmanCoding/OptimisedHuffmanEncoding/CreateHuffmanTree.h
+/Users/victoriastasik/Desktop/HuffmanCoding/HuffmanEncoding/HuffmanDictionary.c
+HuffmanDictionary.h
+/Users/victoriastasik/Desktop/HuffmanCoding/HuffmanEncoding/HuffmanDictionary.h
 ../DataTypes/DataTypes.h
 /Users/victoriastasik/Desktop/HuffmanCoding/DataTypes/DataTypes.h
 stdlib.h
@@ -20,7 +20,7 @@ string.h
 stdio.h
 -
 
-/Users/victoriastasik/Desktop/HuffmanCoding/OptimisedHuffmanEncoding/CreateHuffmanTree.h
+/Users/victoriastasik/Desktop/HuffmanCoding/HuffmanEncoding/HuffmanDictionary.h
 ../DataTypes/DataTypes.h
 /Users/victoriastasik/Desktop/HuffmanCoding/DataTypes/DataTypes.h
 

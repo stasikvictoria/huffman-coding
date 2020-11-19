@@ -10,11 +10,13 @@ Element* occurence(char text[80]);
 //D FONCTION
 Node* occ_min(Element_n* l);
 void list_remove_element_n(Element_n** l, Node* n);
+void list_insert_element_n(Element_n** l, Node* n, int pos);
 Node* return_huffman(Element* l);
 
 //E FONCTION
+void number_of_leaves(Node* tree, int* leaves);
 void dictionary_from_tree(Node* tree, Dictionary** d, int* code, int* code_index);
-void write_dictionary_in_txt(Node* tree);
+void write_dictionary_in_txt(Dictionary* d);
 
 
 #endif //HUFFMANCODING_HUFFMANDICTIONARY_H

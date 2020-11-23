@@ -21,7 +21,7 @@ int main(){
     char* Huffman = "Huffman.txt";
     char* input = "input.txt";
     char* output = "output.txt";
-*/
+    */
     // POUR MAC
 
     char* dico ="../dico.txt";
@@ -43,8 +43,20 @@ int main(){
     printf("Arbre de Huffman correspondant : \n");
     print_tree(n);
 
-    encoding(dico,Huffman,input);
+    //TEST OF THE DICTIONARY
+    int code[8];
+    int code_index = 0;
+    int leaves = 0;
+    number_of_leaves(n, &leaves);
+    Dictionary* d = create_dictionary(leaves);
+    Dictionary* temp = d;
+    dictionary_from_tree(n, &temp, code, &code_index);
+    print_dictionary(d);
+    write_dictionary_in_txt(d);
 
+
+    encoding(dico,Huffman,input);
+    free_dictionary(d);
     free_list(list);
     free_tree(n);
 

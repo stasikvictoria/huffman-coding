@@ -23,7 +23,6 @@ typedef struct Dictionary{
     char letter;
     int code[8];
     struct Dictionary* next;
-    struct Dictionary* previous;
 }Dictionary;
 
 ///***********************Node*****************************
@@ -49,5 +48,8 @@ Element_n* create_list_n(char c, int n);
 void free_list_n(Element_n* l);
 
 ///*******************Dictionary******************************
-Dictionary* create_dictionary(void);
+Dictionary* create_dictionary_element(void);
+Dictionary* create_dictionary(int size);
+void print_dictionary(Dictionary* d);
+void free_dictionary(Dictionary* d);
 #endif //HUFFMANCODING_DATATYPES_H

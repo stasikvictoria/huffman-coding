@@ -74,8 +74,8 @@ void print_Tab_of_DoubleNode(Node* tab, int n){
     }
 }
 
-void swap(DoubleNode** a, DoubleNode** b) {
-    DoubleNode* tmp;
+void swap(Node** a, Node** b) {
+    Node* tmp;
     tmp = *a;
     *a = *b;
     *b = tmp;
@@ -83,7 +83,7 @@ void swap(DoubleNode** a, DoubleNode** b) {
 
 // fast sorting technique
 
-void quick_sorting (DoubleNode* tab, int first, int last) {
+void quick_sorting (Node* tab, int first, int last) {
     int pivot, i, j;
     if(first < last) {
         pivot = first;          //We define the pivot at the beginning

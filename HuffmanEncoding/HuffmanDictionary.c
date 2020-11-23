@@ -82,11 +82,11 @@ void list_remove_element_n(Element_n** l, Node* n){
     Element_n* buffer = *l;
     Element_n* temp = NULL;
 
-    while(buffer->next != NULL)
+    while(buffer->next != NULL) //FOR ALL THE LIST
     {
-        if(buffer->next->data == n)
+        if(buffer->next->data == n)  //IF VALUE HAVE TO BE REMOVE
         {
-            temp = buffer->next->next;
+            temp = buffer->next->next; //REMOVE IT
             free(buffer->next);
             buffer->next = temp;
         }else{
@@ -94,9 +94,9 @@ void list_remove_element_n(Element_n** l, Node* n){
         }
     }
 
-    if ((*l)->data == n)
+    if ((*l)->data == n) //IF THE FIRST VALUE HAVE TO BE REMOVE
     {
-        buffer = *l;
+        buffer = *l; // REMOVE IT
         *l = (*l)->next;
         free(buffer);
     }
@@ -134,7 +134,6 @@ Node* return_huffman(Element* l){
     if (list==NULL){
         return NULL;
     }
-
     else if (list->next ==NULL){ // ONE NODE SO HUFFMAN ONLY ONE CHILD
 
         Node* huffman = create_node(NULL, list->data->occ);

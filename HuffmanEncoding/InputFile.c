@@ -52,28 +52,29 @@ void binary_translation(char* input,char* output){
 //B FONCTION
 int nb_caracteres_fichier(char* nomFichier)
 {
-    FILE* fichier ;
-    fichier = fopen(nomFichier, "r" );    //ouvrir le fichier en lecture seule
+    FILE* file ;
+    file = fopen(nomFichier, "r" );    //open the file mode reading
 
-    if (fichier==NULL)
+    if (file==NULL)
     {
-        printf("Nombre de caracteres = 0");
+        printf("Number of characters = 0");
         exit(EXIT_FAILURE);
         return 0 ;
     }
     else
     {
-        int compteur = 0 ;
-        char char_actuel ;
+        int counter = 0 ;
+        char current_char ;
         do
         {
-            char_actuel = fgetc(fichier) ;
-            //printf("%c \n",char_actuel);
-            compteur ++ ;
-        }while (char_actuel!=EOF);
-        fclose(fichier) ;
-        compteur --;
-        printf("\n\nNombre de caracteres = %d", compteur);
-        return compteur ;
+            current_char = fgetc(file) ;
+            //printf("%c \n",current_char);
+            counter ++ ;
+        }while (current_char!=EOF);
+        fclose(file) ;
+        counter --;
+        printf("\n\nNumber of characters = %d", counter);
+        return counter ;
     }
 }
+

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
-//A FONCTION 
+//A FUNCTION 
 void binary_translation(char* input,char* output){
     //Open the file to read the file
     FILE* fic_input = fopen(input, "r");
@@ -49,12 +49,11 @@ void binary_translation(char* input,char* output){
     fclose(fic_output);
 }
 
-//B FONCTION
+//B FUNCTION
 int nb_caracteres_fichier(char* nomFichier)
 {
     FILE* fichier ;
-    fichier = fopen(nomFichier, "r" );    //ouvrir le fichier en lecture seule
-
+    fichier = fopen(nomFichier, "r" );    //open the file in read only
     if (fichier==NULL)
     {
         printf("Nombre de caracteres = 0");
@@ -63,16 +62,16 @@ int nb_caracteres_fichier(char* nomFichier)
     }
     else
     {
-        int compteur = 0 ;
+        int compteur = 0 ; // the counter is the number of character in the file
         char char_actuel ;
         do
         {
             char_actuel = fgetc(fichier) ;
             //printf("%c \n",char_actuel);
-            compteur ++ ;
+            compteur ++ ; 
         }while (char_actuel!=EOF);
-        fclose(fichier) ;
-        compteur --;
+        fclose(fichier) ; 
+        compteur --; // the remove the char EOF
         printf("\n\nNombre de caracteres = %d", compteur);
         return compteur ;
     }

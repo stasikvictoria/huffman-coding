@@ -3,7 +3,7 @@
 //question M and N
 
 
-// question N 
+// question M
 
 // Function to find the code in the AVL
 
@@ -45,7 +45,7 @@ void encoding_v2(Node_AVL* tree, char* Huffman, char* input){
 }
 
 
-// question M
+// question N
 
 // Recreate the Huffman Tree
 

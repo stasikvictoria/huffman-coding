@@ -213,3 +213,13 @@ void free_dictionary(Dictionary* d){
     }
 }
 
+void print_tree_AVL(Node_AVL*tree)
+{
+    if(tree != NULL)
+    {
+        printf("(%c|%s) ", tree->letter, tree->code);
+        print_tree_AVL(tree->left);
+        print_tree_AVL(tree->right);
+    }
+
+}

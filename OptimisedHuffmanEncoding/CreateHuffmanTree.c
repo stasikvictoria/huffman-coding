@@ -7,16 +7,15 @@
 int MAX_TAB =255;
 
 Node* add_by_dichtomie_v2(char* my_fic){
+    //Open the text file 
     FILE* fic = fopen(my_fic, "r");
     if (fic== NULL){
-        //fprintf(stderr, "ERREUR OUVERTURE FICHIER \n");
-
-        printf("\nEREEUR OUVERTURE FICHIER \n");
+        printf("\nOPENING ERROR : FILE MY_FIC \n");
         exit(EXIT_FAILURE);
     }
+    // Create and initialize the tab
     Node* tab = malloc(MAX_TAB*sizeof(Node));
     int indexe = 0;
-    //INITIALISER MON TAB
     for(indexe=0; indexe<MAX_TAB; indexe++){
         tab[indexe].letter = indexe;
         tab[indexe].occ = 0;
@@ -29,7 +28,7 @@ Node* add_by_dichtomie_v2(char* my_fic){
     int SUP = MAX_TAB-1;
     int POS = -1;
     int MIL;
-    // ADD OCCU TO MY TAB
+    // Add occurences to my tab by dichotomy
     while (my_char != EOF){
         INF =0;
         SUP = MAX_TAB -1;
@@ -52,6 +51,7 @@ Node* add_by_dichtomie_v2(char* my_fic){
         tab[POS].occ += 1;
         my_char = fgetc(fic);
     }
+    //Create the end tab (to return) 
     Node* end_tab = malloc(cpt*sizeof(Node));
     int j=0;
     for (indexe = 0; indexe< cpt ; indexe++){
@@ -61,12 +61,13 @@ Node* add_by_dichtomie_v2(char* my_fic){
         end_tab[indexe] = tab[j];
         j+=1;
     }
+    // Close the file
     free(tab);
     fclose(fic);
     return end_tab;
 }
 
-// POUR TESTER
+// To test
 void print_Tab_of_DoubleNode(Node* tab, int n){
     int indexe = 0;
     for (indexe = 0; indexe<n ; indexe++){

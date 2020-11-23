@@ -1,5 +1,6 @@
 #ifndef HUFFMANCODING_ENCODINGFILEOP_H
 #define HUFFMANCODING_ENCODINGFILEOP_H
+#include "../DataTypes/DataTypes.h"
 
 char* find_code(Node_AVL* tree , char c );
 void encoding_v2(Node_AVL* tree, char* Huffman, char* input);

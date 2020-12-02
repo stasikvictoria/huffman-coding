@@ -39,7 +39,7 @@ Element* occurence(char* input){
     if(fich == NULL)
         printf("\nError to open input");
     else {
-        while (fgets(text, MAX_SIZE, fich) != NULL) {
+        while (fgets(text, len, fich) != NULL) {
             if (text[strlen(text) - 1] == '\n') {
                 text[strlen(text) - 1] = '\0';
             }

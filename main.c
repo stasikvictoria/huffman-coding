@@ -16,12 +16,12 @@ int main(){
     printf("%s",chaine);
 
     // POUR WINDOWS
-    /*
+/*
     char* dico = "dico.txt";
     char* Huffman = "Huffman.txt";
     char* input = "input.txt";
     char* output = "output.txt";
-    */
+*/
     // POUR MAC
 
     char* dico ="../dico.txt";
@@ -32,10 +32,8 @@ int main(){
 
     binary_translation(input,output);
 
-    //int size = nb_caracteres_fichier(input);
-    // size n'est pas utilisé par la suite
 
-    Element* list = occurence(chaine);
+    Element* list = occurence(input);
     print_list(list);
     printf("\n\n");
 
@@ -52,7 +50,7 @@ int main(){
     Dictionary* temp = d;
     dictionary_from_tree(n, &temp, code, &code_index);
     print_dictionary(d);
-    write_dictionary_in_txt(d);
+    write_dictionary_in_txt(d,dico);
 
 
     encoding(dico,Huffman,input);

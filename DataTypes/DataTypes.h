@@ -1,5 +1,8 @@
 #ifndef HUFFMANCODING_DATATYPES_H
 #define HUFFMANCODING_DATATYPES_H
+#include "stdlib.h"
+#include "stdio.h"
+#include "string.h"
 
 typedef struct Element{
     int occ;
@@ -28,6 +31,15 @@ typedef struct Dictionary{
 typedef struct Queue{
     Element_n* first;
 } Queue;
+
+
+typedef struct Node_AVL{
+    char letter;
+    char* code;
+    struct Node_AVl* left;
+    struct Node_AVL* right;
+}Node_AVL;
+
 
 ///***********************Node*****************************
 void print_node(Node*n);

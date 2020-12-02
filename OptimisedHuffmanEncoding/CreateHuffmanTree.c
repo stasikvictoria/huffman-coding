@@ -7,16 +7,15 @@
 int MAX_TAB =255;
 
 Node* add_by_dichtomie_v2(char* my_fic){
+    //Open the text file 
     FILE* fic = fopen(my_fic, "r");
     if (fic== NULL){
-        //fprintf(stderr, "ERREUR OUVERTURE FICHIER \n");
-
-        printf("\nEREEUR OUVERTURE FICHIER \n");
+        printf("\nOPENING ERROR : FILE MY_FIC \n");
         exit(EXIT_FAILURE);
     }
+    // Create and initialize the tab
     Node* tab = malloc(MAX_TAB*sizeof(Node));
     int indexe = 0;
-    //INITIALISER MON TAB
     for(indexe=0; indexe<MAX_TAB; indexe++){
         tab[indexe].letter = indexe;
         tab[indexe].occ = 0;
@@ -29,7 +28,7 @@ Node* add_by_dichtomie_v2(char* my_fic){
     int SUP = MAX_TAB-1;
     int POS = -1;
     int MIL;
-    // ADD OCCU TO MY TAB
+    // Add occurences to my tab by dichotomy
     while (my_char != EOF){
         INF =0;
         SUP = MAX_TAB -1;
@@ -52,6 +51,7 @@ Node* add_by_dichtomie_v2(char* my_fic){
         tab[POS].occ += 1;
         my_char = fgetc(fic);
     }
+    //Create the end tab (to return) 
     Node* end_tab = malloc(cpt*sizeof(Node));
     int j=0;
     for (indexe = 0; indexe< cpt ; indexe++){
@@ -61,12 +61,13 @@ Node* add_by_dichtomie_v2(char* my_fic){
         end_tab[indexe] = tab[j];
         j+=1;
     }
+    // Close the file
     free(tab);
     fclose(fic);
     return end_tab;
 }
 
-// POUR TESTER
+// To test
 void print_Tab_of_DoubleNode(Node* tab, int n){
     int indexe = 0;
     for (indexe = 0; indexe<n ; indexe++){
@@ -102,4 +103,68 @@ void quick_sorting (Node* tab, int first, int last) {
         quick_sorting(tab, first, j - 1);  // This is repeated until the 2 sub-tables are sorted.
         quick_sorting(tab, j + 1, last);
     }
+}
+
+//K
+int compare_queue(Queue* q1, Queue* q2)
+{
+
+    if(q2->first==NULL && q1->first==NULL){return 0;}
+    else if (q2->first==NULL){return 1;}
+    else if (q1->first==NULL){return 2;}
+    else if (q1->first->data->occ < q2->first->data->occ){return 1;}
+    else{return 2;}
+}
+
+Node* create_Huff_tree_from_tab(Node* tab, int taille)
+{
+    Queue* q1=create_queue();
+    Queue* q2=create_queue();
+    int val1; //TO CHOSE BETWEEN q1 AND q2
+    int val2; //TO CHOSE BETWEEN q1 AND q2
+
+
+    if (taille==0)
+    {
+        return NULL;
+    }
+    if(taille==1)
+    {
+        return (&(tab[0]));
+    }
+    else
+    {
+        for(int i=0;i<taille;i++)
+        {
+            enqueue(q1,&tab[i]);
+        }
+        while (q1->first != NULL || (q2->first != NULL && q2->first->next != NULL)) //IF q1 IS NOT EMPTY OR q2 GOT MORE THAN ONE ELEMENT
+        {
+            Node* huffman = create_node(NULL, NULL); //CREATE THE TREE
+            val1= compare_queue(q1,q2);
+            if (val1==1)
+            {
+                huffman->left =dequeue(q1);
+            }
+            else if (val1==2)
+            {
+                huffman->left =dequeue(q2);
+            }
+
+            val2= compare_queue(q1,q2);
+            if (val2==1)
+            {
+                huffman->right =dequeue(q1);
+            }
+            else if (val2==2)
+            {
+                huffman->right =dequeue(q2);
+            }
+            huffman->occ=(huffman->right->occ)+(huffman->left->occ); //HEAD OF TREE TAKE VALUE OF THE SUM OF OCCURENCE OF THE TWO CHILDREN
+            enqueue(q2,huffman);//PUT THE NEW NODE IN q2
+        }
+
+        return q2->first->data;
+    }
+
 }

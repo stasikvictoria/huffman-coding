@@ -3,38 +3,28 @@
 #include <string.h>
 #include <stdio.h>
 
-//A FONCTION
+//A FONCTION 
 void binary_translation(char* input,char* output){
+    //Open the file to read the file
     FILE* fic_input = fopen(input, "r");
     if (fic_input == NULL){
-        //fprintf(stderr, "ERREUR OUVERTURE FICHIER \n");
-
-        printf("\nEREEUR OUVERTURE FICHIER \n");
+        printf("\nOPENING ERROR : FILE INPUT \n");
         exit(EXIT_FAILURE);
     }
-    //printf("\n \nOUVERT input !");
-
-    // CREER LE NOUVEAU FICHIER SI IL N'EST PAS DEJA CREER POUR METTRE LE TEXTE BINAIRE
-
+    //Create the new file if it is not already create
     FILE *fic_output = fopen(output, "w+");
     if (fic_output == NULL){
-        printf("\nERREUR OUVERTURE FICHIER OUTPUT \n");
+        printf("\nOPENNIG ERROR : FILE OUTPUT \n");
         exit(EXIT_FAILURE);
     }
-    //printf("\nOUVERT output ! \n");
-
-    //LIRE LE FICHIER A TRADUIRE
-
+    //Read the file that we want to traduct
     int my_char = 0;
     do {
-        // LIRE LES CARACTERES
-
+        //Read the character
         my_char = fgetc(fic_input);
-        // AFFICHER LES CARACTERES
+        //Display the character
         //printf(" %c", my_char);
-
-        // TRADUIRE EN BINAIRE MY_CHAR
-
+        //Traduct in binary MY_CHAR
         int tab[8] = {0,0,0,0,0,0,0,0};
         int i=0;
         int bin = my_char;
@@ -42,21 +32,19 @@ void binary_translation(char* input,char* output){
             tab[i] = bin%2;
             bin = bin/2;
         }
-        // AFICHER LE CARACTERE EN BINAIRE
+        //Display the character in binary
         /*
         for (i=i; i>=0; i--){
             printf("%d", tab[i]);
         }
         */
-
-        // ENTRER LE CARACTERE BINAIRE DANS LE FICHIER
+        //Get in the character in binary into the output file
         for (i=i; i>=0; i--){
             fprintf(fic_output, "%d", tab[i]);
         }
     }while (my_char != EOF); //EOF = End Of File
     printf("End of translation ! \n Your new file is output.txt \n");
-
-    // PENSER A FERMER LES FICHIERS
+    //Don't forget to close the file !
     fclose(fic_input);
     fclose(fic_output);
 }
@@ -64,27 +52,29 @@ void binary_translation(char* input,char* output){
 //B FONCTION
 int nb_caracteres_fichier(char* nomFichier)
 {
-    FILE* fichier ;
-    fichier = fopen(nomFichier, "r" );    //ouvrir le fichier en lecture seule
+    FILE* file ;
+    file = fopen(nomFichier, "r" );    //open the file mode reading
 
-    if (fichier==NULL)
+    if (file==NULL)
     {
-        printf("Nombre de caracteres = 0");
+        printf("Number of characters = 0");
         exit(EXIT_FAILURE);
         return 0 ;
     }
     else
     {
-        int compteur = 0 ;
-        char char_actuel ;
+        int counter = 0 ;
+        char current_char ;
         do
         {
-            char_actuel = fgetc(fichier) ;
-            //printf("%c \n",char_actuel);
-            compteur ++ ;
-        }while (char_actuel!=EOF);
-        fclose(fichier) ;
-        compteur --;
-        return compteur ;
+            current_char = fgetc(file) ;
+            //printf("%c \n",current_char);
+            counter ++ ;
+        }while (current_char!=EOF);
+        fclose(file) ;
+        counter --;
+        printf("\n\nNumber of characters = %d", counter);
+        return counter ;
     }
 }
+

@@ -7,6 +7,8 @@ int check_letter(Element* list, char letter);
 Element* new_letter(char letter);
 Element* occurence(char* text);
 
+
+
 //D FONCTION
 Node* occ_min(Element_n* l);
 void list_remove_element_n(Element_n** l, Node* n);

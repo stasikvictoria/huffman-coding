@@ -32,12 +32,14 @@ typedef struct Queue{
     Element_n* first;
 } Queue;
 
+
 typedef struct Node_AVL{
     char letter;
     char* code;
     struct Node_AVl* left;
     struct Node_AVL* right;
 }Node_AVL;
+
 
 ///***********************Node*****************************
 void print_node(Node*n);

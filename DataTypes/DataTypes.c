@@ -164,7 +164,45 @@ void free_list_n(Element_n* l)
         free(l);
     }
 }
+///******************File*****************
 
+Queue* create_queue(){
+    Queue* q =malloc(sizeof(Queue*));
+    q->first=NULL;
+    return q;
+}
+
+void enqueue(Queue* q, Node* val){
+    Element_n* nouveau = malloc(sizeof(Element_n*));
+    if (q != NULL && nouveau != NULL){
+        nouveau->data = val;
+        nouveau->next = NULL;
+        if(q->first != NULL){
+            Element_n* tmp =q->first;
+            while(tmp->next != NULL){
+                tmp=tmp->next;
+            }
+            tmp->next = nouveau;
+        }
+        else{
+            q->first = nouveau;
+        }
+    }
+}
+
+Node* dequeue(Queue* q){
+    if ( q->first == NULL){
+        return -1;
+    }
+    else{
+        Node* val=NULL;
+        Element_n* supp = q->first;
+        val= supp->data;
+        q->first = supp->next;
+        free(supp);
+        return val;
+    }
+}
 ///***********************Dictionary*****************************
 
 Dictionary* create_dictionary_element(void){

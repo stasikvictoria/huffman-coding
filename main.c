@@ -9,12 +9,6 @@
 
 
 int main(){
-    char chaine[81]; // 80 caractères + '\0' terminal
-    printf("Enter a text : ");
-    fgets(chaine, 81, stdin);
-    chaine[strlen(chaine)-1]='\0';
-    printf("%s",chaine);
-
     // POUR WINDOWS
     /*
     char* dico = "dico.txt";
@@ -23,12 +17,18 @@ int main(){
     char* output = "output.txt";
     */
     // POUR MAC
-
     char* dico ="../dico.txt";
     char* Huffman="../Huffman.txt";
     char* input = "../input.txt";
     char* output = "../output.txt";
 
+    //TESTS
+    /*
+    char chaine[81]; // 80 caractères + '\0' terminal
+    printf("Enter a text : ");
+    fgets(chaine, 81, stdin);
+    chaine[strlen(chaine)-1]='\0';
+    printf("%s",chaine);
 
     binary_translation(input,output);
 
@@ -43,7 +43,6 @@ int main(){
     printf("Arbre de Huffman correspondant : \n");
     print_tree(n);
 
-    //TEST OF THE DICTIONARY
     int code[8];
     int code_index = 0;
     int leaves = 0;
@@ -54,12 +53,13 @@ int main(){
     print_dictionary(d);
     write_dictionary_in_txt(d);
 
-
     encoding(dico,Huffman,input);
     free_dictionary(d);
     free_list(list);
     free_tree(n);
+    */
 
+    writting_output_txt(input, output);
 
     return 0;
 }

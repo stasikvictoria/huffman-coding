@@ -85,7 +85,6 @@ int nb_caracteres_fichier(char* nomFichier)
         }while (char_actuel!=EOF);
         fclose(fichier) ;
         compteur --;
-        printf("\n\nNombre de caracteres = %d", compteur);
         return compteur ;
     }
 }

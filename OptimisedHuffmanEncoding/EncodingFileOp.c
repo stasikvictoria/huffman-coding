@@ -102,5 +102,43 @@ Node* Huffman_tree_from_dico(char* dico ) {
     return Huffman_tree;
 }
 
+void optimised_decoding(char* Huffman, char* dico){
+    //Open the Huffman file
+    FILE* fic = fopen(Huffman, "r");
+    if (fic== NULL){
+        printf("\nOPENING FAIL \n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Create or erase the decoding file to write the text inside
+    FILE* dec = fopen("decoding.txt", "w+");
+    if (dec== NULL){
+        printf("\nOPENING FAIL \n");
+        exit(EXIT_FAILURE);
+    }
+
+    // my_char to travel the file
+    int my_char = fgetc(fic);
+    Node* t = Huffman_tree_from_dico(dico);
+    print_tree(t);
+    Node* temp = create_node(NULL, 0);
+    temp = t;
+    while (my_char!=EOF){
+        if(my_char==48){
+            temp = temp->left;
+        }
+        else if(my_char==49){
+            temp = temp->right;
+        }
+        if (temp->letter != NULL){
+            fprintf(dec, "%c", temp->letter);
+            temp = t;
+        }
+        my_char = fgetc(fic);
+    }
+    free_tree(t);
+    fclose(dec);
+    fclose(fic);
+}
 
 // use the huffman tree to decode

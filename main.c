@@ -57,7 +57,7 @@ int main(){
     free_tree(n);
     */
 
-    writting_output_txt(input, output);
+     writting_output_txt(input, Huffman);
 
     return 0;
 }

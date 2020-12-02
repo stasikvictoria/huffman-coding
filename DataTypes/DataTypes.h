@@ -25,6 +25,10 @@ typedef struct Dictionary{
     struct Dictionary* next;
 }Dictionary;
 
+typedef struct Queue{
+    Element_n* first;
+} Queue;
+
 ///***********************Node*****************************
 void print_node(Node*n);
 void print_tree(Node*tree);
@@ -46,6 +50,11 @@ Element_n* element_to_element_n(Element* l);
 void print_list_n(Element_n* l);
 Element_n* create_list_n(char c, int n);
 void free_list_n(Element_n* l);
+
+///**********************Queue*********************
+Queue* create_queue();
+void enqueue(Queue* q, Node* val);
+Node* dequeue(Queue* q);
 
 ///*******************Dictionary******************************
 Dictionary* create_dictionary_element(void);

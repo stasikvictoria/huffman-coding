@@ -16,7 +16,7 @@ Node* return_huffman(Element* l);
 //E FONCTION
 void number_of_leaves(Node* tree, int* leaves);
 void dictionary_from_tree(Node* tree, Dictionary** d, int* code, int* code_index);
-void write_dictionary_in_txt(Dictionary* d);
+void write_dictionary_in_txt(Dictionary* d,char* input);
 
 
 #endif //HUFFMANCODING_HUFFMANDICTIONARY_H

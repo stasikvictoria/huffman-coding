@@ -5,7 +5,9 @@
 //C FONCTION
 int check_letter(Element* list, char letter);
 Element* new_letter(char letter);
-Element* occurence(char* input);
+Element* occurence(char* text);
+
+
 
 //D FONCTION
 Node* occ_min(Element_n* l);

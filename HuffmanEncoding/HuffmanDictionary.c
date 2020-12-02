@@ -31,20 +31,7 @@ Element* new_letter(char letter){
 }
 
 
-Element* occurence(char* input){
-    int len = nb_caracteres_fichier(input);
-    FILE* fich = NULL;
-    char text[len] ;
-    fich = fopen(input,"r");
-    if(fich == NULL)
-        printf("\nError to open input");
-    else {
-        while (fgets(text, len, fich) != NULL) {
-            if (text[strlen(text) - 1] == '\n') {
-                text[strlen(text) - 1] = '\0';
-            }
-        }
-    }
+Element* occurence(char* text){
     if(strlen(text)>0) {                                // if text no void
         Element* list_occ = new_letter(text[0]);        // we start the list with the first letter
         Element* temp = list_occ;

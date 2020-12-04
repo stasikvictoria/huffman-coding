@@ -4,6 +4,8 @@
 #include "../DataTypes/DataTypes.h"
 #include "../HuffmanEncoding/EncodingFile.h"
 
+char* copy2(const char* chaine);
+
 char* find_code(const Node_AVL* tree ,const  char c );
 void encoding_v2(const Node_AVL* tree,const char* Huffman,const char* input);
 

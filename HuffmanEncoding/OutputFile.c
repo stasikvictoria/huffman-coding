@@ -57,8 +57,43 @@ void writting_output_txt(const char* input,const char* dico,const char* output){
 
     free(new_text);
     free_dictionary(d);
-    //free(text);
+    free(text);
     free_list(e);
     free_tree(tree);
+}
+
+
+void menue(int* choix)
+{
+    int i,n,ch;
+    printf(" ");
+    for (i=0;i<68;i++){
+        printf("-");
+    }
+    for (i=0;i<9;i++){
+        printf("\n⎥");
+        if (i==1)
+            printf("                           ACCUEIL                                ");
+        else if (i==3)
+            printf("            1 > Huffman Coding without optimizations              ");
+        else if (i==5)
+            printf("                 2 > Huffman Coding optimised                     ");
+        else if (i==7)
+            printf("          3 >  Decoding a Huffman file already encoded            ");
+        else
+            printf("                                                                  ");
+        printf(" ⎥");
+    }
+    printf("\n");
+    printf(" ");
+    for (i=0;i<68;i++){
+        printf("-");
+    }
+    printf("\n\nQue souhaitez vous faire : ");
+
+    do{
+        n = scanf("%d",choix);
+        while((ch = (int)getchar()) != '\n' && ch != EOF);
+    }while (n!=1 || (*choix!=1 && *choix!=2 && *choix!=3));
 }
 

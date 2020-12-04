@@ -2,7 +2,7 @@
 
 int MAX_TAB =255;
 
-Node* add_by_dichtomie_v2(const char* my_fic){
+Node* add_by_dichtomie_v2(const char* my_fic,int* len){
     //Open the text file 
     FILE* fic = fopen(my_fic, "r");
     if (fic== NULL){
@@ -57,6 +57,7 @@ Node* add_by_dichtomie_v2(const char* my_fic){
         end_tab[indexe] = tab[j];
         j+=1;
     }
+    *len = cpt;
     // Close the file
     free(tab);
     fclose(fic);
@@ -95,9 +96,8 @@ void quick_sorting (Node* tab, int first, int last) {
 }
 
 //K
-int compare_queue(Queue* q1, Queue* q2)
+int compare_queue(const Queue* q1,const Queue* q2)
 {
-
     if(q2->first==NULL && q1->first==NULL){return 0;}
     else if (q2->first==NULL){return 1;}
     else if (q1->first==NULL){return 2;}

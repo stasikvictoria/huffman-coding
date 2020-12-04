@@ -5,11 +5,31 @@
 
 // question M
 
+
+char* copy2(const char* chaine){
+    char* code = calloc(1,strlen(chaine)*sizeof(char));
+    int i=0,j;
+    for(j=1;j < strlen(chaine) ; j++){
+        code[i] = chaine[j];
+        i++;
+    }
+    return code;
+}
+
 // Function to find the code in the AVL
 
 char* find_code(const Node_AVL* tree ,const char c ){
     if((int)(tree->letter)==(int)c){
-        return tree->code;
+        char* final = calloc(1,100*sizeof(char));
+        int i = 0;
+        while(tree->code[i]!=2){
+            if(tree->code[i] ==1)
+                final[i] = '1';
+            else
+                final[i] = '0';
+            i++;
+        }
+        return final ;
     }
     else if((int)(tree->letter) > (int)c){
         return find_code(tree->left, c);
@@ -18,7 +38,6 @@ char* find_code(const Node_AVL* tree ,const char c ){
         return find_code(tree->right, c);
     }
 }
-
 
 
 void encoding_v2(const Node_AVL* tree,const char* Huffman,const char* input){
@@ -90,12 +109,24 @@ Node* Huffman_tree_from_dico(const char* dico ) {
         printf("\nError to open dico");
     else{
         while(fgets(chaine,MAX_SIZE,fich)!=NULL){
-            if(chaine[strlen(chaine)-1]=='\n'){
-                chaine[strlen(chaine)-1]='\0';
+            if(chaine[0]!= '\n'){
+                if(chaine[strlen(chaine)-1]=='\n'){
+                    chaine[strlen(chaine)-1]='\0';
+                }
+                code = copy(chaine);            // we save the code
+                letter = chaine[0];             // we save the letter
+                add_element(code,&Huffman_tree,letter,0);  // we add the letter on the Huffman tree with the help of the code and a position in the code
             }
-            code = copy(chaine);            // we save the code
-            letter = chaine[0];             // we save the letter
-            add_element(code,&Huffman_tree,letter,0);       // we add the letter on the Huffman tree with the help of the code and a position in the code
+
+            else{   // pour le cas ou on a retour à la ligne
+                fgets(chaine,MAX_SIZE,fich);
+                if(chaine[strlen(chaine)-1]=='\n'){
+                    chaine[strlen(chaine)-1]='\0';
+                }
+                code = copy2(chaine);
+                add_element(code,&Huffman_tree,'\n',0);
+            }
+
         }
     }
     fclose(fich);
@@ -120,7 +151,7 @@ void optimised_decoding(const char* Huffman,const char* dico,const char* decodin
     // my_char to travel the file
     int my_char = fgetc(fic);
     Node* t = Huffman_tree_from_dico(dico);
-    //print_tree(t);
+    //3print_tree(t);
     Node* temp = create_node(NULL, 0);
     temp = t;
     while (my_char!=EOF ){

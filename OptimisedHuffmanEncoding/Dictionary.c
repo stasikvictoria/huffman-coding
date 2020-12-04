@@ -1,41 +1,21 @@
 #include "Dictionary.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h> 
 
-//typedef Node* Tree;
-
-typedef Node_AVL* Tree; 
-
-
-Node_AVL* create_node_avl(char letter, char* code)
-{
-  Node_AVL* new_node = (Node_AVL*)malloc(sizeof(Node_AVL)); 
-  new_node -> letter = letter ; 
-  new_node -> code = code ; 
-  new_node -> left = NULL ; 
-  new_node -> right = NULL ; 
-  return new_node ; 
-}
-
-
-/*
-Node* create_tree_n(int n){
-    if(n <= 0){
-        return NULL;
+void add_node_BST(Node_AVL** tree,const char letter,const int* code,int code_index){
+    if(*tree == NULL){
+        *tree = create_node_avl(letter,code,code_index);
     }
     else{
-        Node* new_node = create_node(n);   
-        new_node->left = create_tree_n((n-1)/2 + (n-1)%2);  
-        new_node->right = create_tree_n((n-1)/2); 
-        return new_node;
+        if ((int)(*tree)->letter > (int)letter){
+            add_node_BST(&((*tree)->left) ,letter, code,code_index);
+        }
+        else if((int)(*tree)->letter < (int)letter){
+            add_node_BST(&((*tree)->right) ,letter,code,code_index);
+        }
     }
 }
 
-*/
-
-int depth(Node_AVL* tree){
+int depth(const Node_AVL* tree){
     if(tree == NULL){
         return 0;
     }
@@ -52,7 +32,8 @@ int depth(Node_AVL* tree){
 }
 
 
-int bf(Node_AVL* tree){    //balance factor 
+
+int bf(const Node_AVL* tree){    //balance factor
     if(tree == NULL) {
         return 0;
     }
@@ -84,7 +65,6 @@ void balance(Node_AVL** tree){
     if (*tree != NULL){
         balance(&((*tree)->left));  // Postfix
         balance(&((*tree)->right));
-        
         int balance_factor = bf(*tree);
         if (balance_factor <= -2){// Cas Gauche - ??
             if(bf((*tree)->left) > 0){// Gauche - Droite
@@ -103,114 +83,75 @@ void balance(Node_AVL** tree){
 
 
 
-void add_node_AVL(Node_AVL** tree, char letter, char* code )
-{ 
-  if(*tree == NULL)
-  {
-        *tree = create_node_avl(letter,code); 
-  }
-  else
-  {
-
-    int pos=0 ; 
-    int len_code = strlen(code) ;
-    printf("Ajout %c. ", letter) ; 
-    printf("longueur %d \n", len_code); 
-
-    pos = len_code -1 ; 
-     
-    if (code[pos] == '0' )
-    { 
-      add_node_AVL(&((*tree)->left) , letter, code );     
-    }
-    else if(code[pos] == '1' )
-    { 
-      add_node_AVL(&((*tree)->right) , letter, code );     
-    }
-       
-  }
-
-  balance(tree) ; 
-
+void add_node_AVL(Node_AVL** tree,const char letter, int* code, const int code_index){
+    add_node_BST(tree,letter,code,code_index);
+    balance(tree) ;
 }
 
 
 
-void print_tree_AVL(Node_AVL* tree)
-{
-    if(tree != NULL)
+
+void code_from_tree(const Node* tree, int* code, int* code_index, Node_AVL** AVL){
+    if (tree != NULL){
+        if (tree->left == NULL && tree->right == NULL){
+            code[*code_index] = 2;
+            add_node_AVL(AVL,tree->letter,code,*code_index);
+        }
+        code[*code_index] = 0;
+        *code_index = *code_index + 1;
+        code_from_tree(tree->left, code, code_index,AVL);
+        *code_index = *code_index - 1;
+        code[*code_index] = 1;
+        *code_index = *code_index + 1;
+        code_from_tree(tree->right, code, code_index,AVL);
+        *code_index = *code_index - 1;
+    }
+}
+
+Node_AVL* AVL_dico(const Node* tree){
+    Node_AVL* new_tree = NULL;
+
+    if (tree!=NULL){
+        int* code = calloc(1,100*sizeof(int));
+        int code_index = 0;
+        code_from_tree(tree,code,&code_index,&new_tree);
+    }
+    return new_tree;
+}
+
+void fill_dico(const Node_AVL* tree,const FILE* file){
+    if(tree!=NULL){
+        fprintf(file, "%c:", tree->letter);
+        int i = 0;
+        while (tree->code[i] == 1 || tree->code[i] == 0){
+            fprintf (file,"%d", tree->code[i]);
+            i++;
+        }
+        fprintf(file,"\n");
+        fill_dico(tree->left, file);
+        fill_dico(tree->right,file);
+    }
+}
+
+void write_AVL_in_dico(const Node_AVL* tree,const char* dico){
+    FILE* file = NULL;
+    file = fopen(dico, "w+");
+    if (file != NULL)
     {
-        printf("(%c|%s) ", tree->letter, tree->code);
-        print_tree_AVL(tree->left);
-        print_tree_AVL(tree->right);
-
-    }
-}
-
-
-char* copy(char* chaine){
-    char* code = malloc(strlen(chaine)*sizeof(char));
-    int i=0,j=2;
-    for(j=2;j < strlen(chaine) ; j++){
-        code[i] = chaine[j];
-        i++;
-    }
-    return code;
-}
-
-
-
-#define MAX_SIZE 100 
-
-Node_AVL* AVL_from_dico(char* dico ){
-    Node_AVL* tree = NULL ; 
-
-    FILE* fich = NULL ; 
-    char chaine[MAX_SIZE] = "" ; 
-    char* code = NULL ; 
-    char letter ; 
-    fich = fopen(dico,"r"); 
-
-    if(fich == NULL){
-      printf("ERROR TO OPEN DICO\n "); 
-    }
-    else 
-    {
-      int counter = 1 ; 
-      while(fgets(chaine,MAX_SIZE,fich)!=NULL)
-      {
-          printf(" COUNTER : %d \n", counter); 
-           
-          if(chaine[strlen(chaine)-1]=='\n'){
-              chaine[strlen(chaine)-1]='\0';
-          }
-          code = copy(chaine) ; 
-          
-          letter = chaine[0] ; 
-          add_node_AVL(&tree, letter , code );
-
-          counter ++;
-      }
+        fill_dico(tree,file);
+        fclose(file);
     }
 
-    fclose (fich); 
-
-    printf("\n");
-    printf("prof : %d\n", depth(tree));
-    
-
-    print_tree_AVL(tree) ; 
-
-    return tree ;
-} 
 
 
 
 
 
 
-int main (void){
-  AVL_from_dico("dico.txt") ; 
-  return 0 ; 
-}
+
+
+
+
+
+
 

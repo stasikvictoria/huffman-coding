@@ -37,8 +37,8 @@ Node* create_node(const char c,const int oc)
     return new_tree;
 
 }
-void free_tree(const Node* tree)
-{
+
+void free_tree(Node* tree){
     if(tree != NULL)
     {
         free_tree(tree->left);
@@ -248,15 +248,54 @@ void free_dictionary(Dictionary* d){
     }
 }
 
+
+
+
+
+
+Node_AVL* create_node_avl(const char letter,const int* code, int code_index)
+{
+    Node_AVL* new_node = (Node_AVL*)malloc(sizeof(Node_AVL));
+    new_node -> letter = letter ;
+    int i = 0;
+    while (code[i] != 2) {
+        new_node->code[i] = code[i];
+        i++;
+        code_index--;
+    }
+    new_node->code[i] = 2;
+    new_node -> left = NULL ;
+    new_node -> right = NULL ;
+    return new_node ;
+}
+
 void print_tree_AVL(const Node_AVL*tree)
 {
     if(tree != NULL)
     {
-        printf("(%c|%s) ", tree->letter, tree->code);
+        printf("\n");
+        printf("(%c| ", tree->letter);
+        int i = 0;
+        while (tree->code[i] == 1 || tree->code[i] == 0){
+            printf ("%d", tree->code[i]);
+            i++;
+        }
+        printf(")");
+
         print_tree_AVL(tree->left);
         print_tree_AVL(tree->right);
     }
 
+}
+
+void free_tree_AVL(const Node_AVL* tree)
+{
+    if(tree != NULL)
+    {
+        free_tree_AVL(tree->left);
+        free_tree_AVL(tree->right);
+        free(tree);
+    }
 }
 
 
@@ -266,3 +305,4 @@ void print_Tab_of_DoubleNode(const Node* tab,const int n){
         printf("\n%c : %d", tab[indexe].letter, tab[indexe].occ);
     }
 }
+

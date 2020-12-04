@@ -1,7 +1,6 @@
 #ifndef HUFFMANCODING_ENCODINGFILE_H
 #define HUFFMANCODING_ENCODINGFILE_H
 #define MAX_SIZE 100
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

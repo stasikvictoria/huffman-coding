@@ -126,46 +126,6 @@ void list_insert_element_n(Element_n** l,const Node* n,const int pos){
 
 }
 
-
-/*
-Node* return_huffman(Element* l){
-    Element_n* list = element_to_element_n(l); // LIST BECOME A LIST WITH NODE
-
-    if (list==NULL){
-        return NULL;
-    }
-    else if (list->next ==NULL){ // ONE NODE SO HUFFMAN ONLY ONE CHILD
-
-        Node* huffman = create_node(NULL, list->data->occ);
-        huffman->right=occ_min(list);
-        return huffman;
-    }
-
-    else{ // OTHER CASE
-        Node* huffman = create_node(NULL, NULL); //CREATE THE TREE
-        huffman->right=occ_min(list); // TREE FIRST CHILD
-        list_remove_element_n(&list, huffman->right); //REMOVE THE ELEMENT ALREADY IN THE TREE
-        huffman->left=occ_min(list); //TREE SECOND CHILD
-        list_remove_element_n(&list, huffman->left); //REMOVE THE ELEMENT
-        huffman->occ=(huffman->right->occ)+(huffman->left->occ); //HEAD OF TREE TAKE VALUE OF THE SUM OF OCCURENCE OF THE TWO CHILDREN
-
-        Node* node_r=huffman; //RIGHT CHILD IS THE TREE ALDREADY CREATE
-        Node* node_l=NULL;
-
-        while (list != NULL){ // BECAUSE VALUES ARE REMOVE EACH TIME
-            node_l=occ_min(list); //LEFT CHILD TAKE THE LITELEST VALUE OH THE LIST
-            list_remove_element_n(&list, node_l);//REMOVE THE ELEMENT
-            Node* base=create_node(NULL,node_l->occ+node_r->occ); //CREATION HEAD OF TREE + TAKE VALUE OF THE SUM OF OCCURENCE OF THE TWO CHILDREN
-            base->right=node_r;  // MOVE FOR THE NEXT NODE OF THE LIST
-            base->left=node_l;
-            node_r=base;
-            huffman=base;
-        }
-        return huffman;
-    }
-
-}
- */
 Node* return_huffman(const Element* l){
     Element_n* list = element_to_element_n(l); // LIST BECOME A LIST WITH NODE
 

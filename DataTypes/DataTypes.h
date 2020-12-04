@@ -35,7 +35,7 @@ typedef struct Queue{
 
 typedef struct Node_AVL{
     char letter;
-    char* code;
+    int code[100];
     struct Node_AVl* left;
     struct Node_AVL* right;
 }Node_AVL;
@@ -45,7 +45,7 @@ typedef struct Node_AVL{
 void print_node(const Node*n);
 void print_tree(const Node*tree);
 Node* create_node(const char c,const int oc);
-void free_tree(const Node* tree);
+void free_tree(Node* tree);
 void print_Tab_of_DoubleNode(const Node* tab,const int n);
 
 ///***********************Element******************
@@ -77,5 +77,11 @@ void free_dictionary(Dictionary* d);
 
 ///*******************Node_AVL******************************
 
+Node_AVL* create_node_avl(const char letter,const int* code, int code_index);
 void print_tree_AVL(const Node_AVL*tree);
+void free_tree_AVL(const Node_AVL* tree);
+
+
+
+
 #endif //HUFFMANCODING_DATATYPES_H

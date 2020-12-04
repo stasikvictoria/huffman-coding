@@ -47,6 +47,13 @@ void free_tree(Node* tree){
     }
 }
 
+void print_Tab_of_DoubleNode(const Node* tab,const int n){
+    int indexe = 0;
+    for (indexe = 0; indexe<n ; indexe++){
+        printf("\n%c : %d", tab[indexe].letter, tab[indexe].occ);
+    }
+}
+
 ///***********************Element******************
 
 Element* create_element(const char c,const int oc){
@@ -78,18 +85,6 @@ void print_list2(const Element* l){
         buffer = buffer->next;
     }
     printf("NULL\n");
-}
-
-Element* create_list(const char c,const int n)
-{
-    if(n <= 0) {
-        return NULL;
-    }
-    else {
-        Element* l = create_element(c, n);
-        l->next = create_list(c+1, n-1);
-        return l;
-    }
 }
 
 void free_list(Element* l)
@@ -142,18 +137,6 @@ Element_n* element_to_element_n(Element* l){
 
 }
 
-Element_n* create_list_n(char c,int n)
-{
-    if(n <= 0) {
-        return NULL;
-    }
-    else {
-        Element_n* l = create_element_n(c, n);
-        l->next = create_list_n(c+1, n-1);
-        return l;
-    }
-}
-
 void free_list_n(Element_n* l)
 {
     if(l != NULL) {
@@ -161,7 +144,7 @@ void free_list_n(Element_n* l)
         free(l);
     }
 }
-///******************File*****************
+///******************Queue*****************
 
 Queue* create_queue(){
     Queue* q =malloc(sizeof(Queue*));
@@ -248,9 +231,7 @@ void free_dictionary(Dictionary* d){
     }
 }
 
-
-
-
+///***********************Node_AVL*****************************
 
 
 Node_AVL* create_node_avl(const char letter,const int* code, int code_index)
@@ -299,10 +280,4 @@ void free_tree_AVL(const Node_AVL* tree)
 }
 
 
-void print_Tab_of_DoubleNode(const Node* tab,const int n){
-    int indexe = 0;
-    for (indexe = 0; indexe<n ; indexe++){
-        printf("\n%c : %d", tab[indexe].letter, tab[indexe].occ);
-    }
-}
 

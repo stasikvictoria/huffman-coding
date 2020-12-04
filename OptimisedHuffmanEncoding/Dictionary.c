@@ -141,6 +141,7 @@ void write_AVL_in_dico(const Node_AVL* tree,const char* dico){
         fill_dico(tree,file);
         fclose(file);
     }
+}
 
 
 

@@ -38,9 +38,35 @@ Element* occurence(const char* text);
 
 
 //D FONCTION
+
+/**
+* \brief Function to find the node with the the smallest occurrence in a list of Element_n.
+* \param l the first element of the list to search in. 
+* \return the Node's pointer, the node with the smallest occurrence.
+* \return \c NULL, if the list of Element_n is empty.
+*/
 Node* occ_min(Element_n* l);
+
+/**
+* \brief Function to delate an element of a list of Element_n.
+* \param l a pointer on the first element of the list to delate in.
+* \param n a pointer on the node to remove. 
+*/
 void list_remove_element_n(Element_n** l,const Node* n);
+
+/**
+* \brief Function to add an element to a list of Element_n.
+* \param l a pointer on the first element of the list which we want to delete inside.
+* \param n a the node to insert in the list.
+* \param pos the position where the node have to be insert. 
+*/
 void list_insert_element_n(Element_n** l,const Node* n, const int pos);
+
+/**
+* \brief Function to cretate an Huffman tree from e list of Element.
+* \param l the first element of the list of Element with all the caracteres of the text and their occuurance. 
+* \return the Node's pointer, the first node of the Huffman tree. 
+*/
 Node* return_huffman(const Element* l);
 
 //E FONCTION

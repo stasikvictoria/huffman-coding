@@ -1,10 +1,8 @@
 #include "InputFile.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+
 
 //A FONCTION 
-void binary_translation(char* input,char* output){
+void binary_translation(const char* input,const char* output){
     //Open the file to read the file
     FILE* fic_input = fopen(input, "r");
     if (fic_input == NULL){
@@ -43,14 +41,14 @@ void binary_translation(char* input,char* output){
             fprintf(fic_output, "%d", tab[i]);
         }
     }while (my_char != EOF); //EOF = End Of File
-    printf("End of translation ! \n Your new file is output.txt \n");
+    //printf("End of translation ! \n Your new file is output.txt \n");
     //Don't forget to close the file !
     fclose(fic_input);
     fclose(fic_output);
 }
 
 //B FONCTION
-int nb_caracteres_fichier(char* nomFichier)
+int nb_caracteres_fichier(const char* nomFichier)
 {
     FILE* file ;
     file = fopen(nomFichier, "r" );    //open the file mode reading

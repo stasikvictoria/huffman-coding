@@ -2,9 +2,14 @@
 #define HUFFMANCODING_ENCODINGFILE_H
 #define MAX_SIZE 100
 
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+
 //F FONCTION
-char* copy(char* chaine);
-char* open_file(char* file , char c );
-void encoding(char* dico, char* Huffman, char* input);
+char* copy(const char* chaine);
+char* open_file(const char* file ,const char c );
+void encoding(const char* dico,const  char* Huffman,const char* input);
 
 #endif //HUFFMANCODING_ENCODINGFILE_H

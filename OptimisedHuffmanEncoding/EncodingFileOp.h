@@ -1,11 +1,14 @@
 #ifndef HUFFMANCODING_ENCODINGFILEOP_H
 #define HUFFMANCODING_ENCODINGFILEOP_H
-#define MAX_SIZE 1000000
 
-char* find_code(Node_AVL* tree , char c );
-void encoding_v2(Node_AVL* tree, char* Huffman, char* input);
+#include "../DataTypes/DataTypes.h"
+#include "../HuffmanEncoding/EncodingFile.h"
 
-void add_element(char* code, Node** Huffman_tree, char letter,int pos);
-Node* Huffman_tree_from_dico(char* dico);
+char* find_code(const Node_AVL* tree ,const  char c );
+void encoding_v2(const Node_AVL* tree,const char* Huffman,const char* input);
+
+void add_element(char* code, Node** Huffman_tree,const char letter, int pos);
+Node* Huffman_tree_from_dico(const char* dico);
+void optimised_decoding(const char* Huffman,const char* dico, const char* decoding);
 
 #endif //HUFFMANCODING_ENCODINGFILEOP_H

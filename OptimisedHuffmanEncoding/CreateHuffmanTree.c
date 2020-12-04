@@ -1,12 +1,8 @@
 #include "CreateHuffmanTree.h"
-#include "../DataTypes/DataTypes.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 
 int MAX_TAB =255;
 
-Node* add_by_dichtomie_v2(char* my_fic){
+Node* add_by_dichtomie_v2(const char* my_fic){
     //Open the text file 
     FILE* fic = fopen(my_fic, "r");
     if (fic== NULL){
@@ -67,13 +63,6 @@ Node* add_by_dichtomie_v2(char* my_fic){
     return end_tab;
 }
 
-// To test
-void print_Tab_of_DoubleNode(Node* tab, int n){
-    int indexe = 0;
-    for (indexe = 0; indexe<n ; indexe++){
-        printf("\n%c : %d", tab[indexe].letter, tab[indexe].occ);
-    }
-}
 
 void swap(Node** a, Node** b) {
     Node* tmp;
@@ -116,7 +105,7 @@ int compare_queue(Queue* q1, Queue* q2)
     else{return 2;}
 }
 
-Node* create_Huff_tree_from_tab(Node* tab, int taille)
+Node* create_Huff_tree_from_tab(const Node* tab,const int taille)
 {
     Queue* q1=create_queue();
     Queue* q2=create_queue();

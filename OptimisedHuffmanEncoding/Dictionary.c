@@ -1,5 +1,6 @@
 #include "Dictionary.h"
 
+
 void add_node_BST(Node_AVL** tree,const char letter,const int* code,int code_index){
     if(*tree == NULL){
         *tree = create_node_avl(letter,code,code_index);
@@ -29,6 +30,7 @@ int depth(const Node_AVL* tree){
         }
     }
 }
+
 
 
 int bf(const Node_AVL* tree){    //balance factor
@@ -63,7 +65,6 @@ void balance(Node_AVL** tree){
     if (*tree != NULL){
         balance(&((*tree)->left));  // Postfix
         balance(&((*tree)->right));
-
         int balance_factor = bf(*tree);
         if (balance_factor <= -2){// Cas Gauche - ??
             if(bf((*tree)->left) > 0){// Gauche - Droite
@@ -140,5 +141,17 @@ void write_AVL_in_dico(const Node_AVL* tree,const char* dico){
         fill_dico(tree,file);
         fclose(file);
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

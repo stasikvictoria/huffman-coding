@@ -7,7 +7,7 @@
 
 // Function to find the code in the AVL
 
-char* find_code(Node_AVL* tree , char c ){
+char* find_code(const Node_AVL* tree ,const char c ){
     if((int)(tree->letter)==(int)c){
         return tree->code;
     }
@@ -21,7 +21,7 @@ char* find_code(Node_AVL* tree , char c ){
 
 
 
-void encoding_v2(Node_AVL* tree, char* Huffman, char* input){
+void encoding_v2(const Node_AVL* tree,const char* Huffman,const char* input){
     FILE* fich = NULL,*fich2 = NULL;
     fich = fopen(input,"r");
     int current_letter = 0;
@@ -51,7 +51,7 @@ void encoding_v2(Node_AVL* tree, char* Huffman, char* input){
 
 // add element in the Huffman Tree
 
-void add_element(char* code, Node** Huffman_tree, char letter,int pos){
+void add_element(char* code, Node** Huffman_tree,const char letter, int pos){
     if(*Huffman_tree != NULL){                                              // if the node isn't void
         if(code[pos]=='0'){
             add_element(code,&((*Huffman_tree)->left),letter,pos+1);        // go to left if we are on the 0 in the code
@@ -77,7 +77,7 @@ void add_element(char* code, Node** Huffman_tree, char letter,int pos){
 }
 
 // create the huffman tree from the dico file
-Node* Huffman_tree_from_dico(char* dico ) {
+Node* Huffman_tree_from_dico(const char* dico ) {
     Node* Huffman_tree = create_node(NULL,NULL);
 
     FILE* fich = NULL;
@@ -102,7 +102,7 @@ Node* Huffman_tree_from_dico(char* dico ) {
     return Huffman_tree;
 }
 
-void optimised_decoding(char* Huffman, char* dico){
+void optimised_decoding(const char* Huffman,const char* dico,const char* decoding){
     //Open the Huffman file
     FILE* fic = fopen(Huffman, "r");
     if (fic== NULL){
@@ -111,7 +111,7 @@ void optimised_decoding(char* Huffman, char* dico){
     }
 
     // Create or erase the decoding file to write the text inside
-    FILE* dec = fopen("decoding.txt", "w+");
+    FILE* dec = fopen(decoding, "w+");
     if (dec== NULL){
         printf("\nOPENING FAIL \n");
         exit(EXIT_FAILURE);
@@ -120,14 +120,14 @@ void optimised_decoding(char* Huffman, char* dico){
     // my_char to travel the file
     int my_char = fgetc(fic);
     Node* t = Huffman_tree_from_dico(dico);
-    print_tree(t);
+    //print_tree(t);
     Node* temp = create_node(NULL, 0);
     temp = t;
-    while (my_char!=EOF){
-        if(my_char==48){
+    while (my_char!=EOF ){
+        if(my_char==48 && temp->left!=NULL){
             temp = temp->left;
         }
-        else if(my_char==49){
+        else if(my_char==49 && temp->right!=NULL){
             temp = temp->right;
         }
         if (temp->letter != NULL){

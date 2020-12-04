@@ -1,10 +1,7 @@
 #include "DataTypes.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 
 ///***********************Node*****************************
-void print_node(Node*n)
+void print_node(const Node*n)
 {
     if (n==NULL){
         printf("NULL ");
@@ -14,7 +11,7 @@ void print_node(Node*n)
     }
 }
 
-void print_tree(Node*tree)
+void print_tree(const Node*tree)
 {
     if(tree != NULL)
     {
@@ -30,7 +27,7 @@ void print_tree(Node*tree)
 
 }
 
-Node* create_node(char c, int oc)
+Node* create_node(const char c,const int oc)
 {
     Node* new_tree = (Node*)malloc (sizeof(Node));
     new_tree->letter = c;
@@ -40,7 +37,7 @@ Node* create_node(char c, int oc)
     return new_tree;
 
 }
-void free_tree(Node* tree)
+void free_tree(const Node* tree)
 {
     if(tree != NULL)
     {
@@ -52,7 +49,7 @@ void free_tree(Node* tree)
 
 ///***********************Element******************
 
-Element* create_element(char c, int oc){
+Element* create_element(const char c,const int oc){
     Element* new_e = malloc(sizeof(Element));
     new_e->letter = c;
     new_e->occ = oc;
@@ -60,7 +57,7 @@ Element* create_element(char c, int oc){
     return new_e;
 }
 
-void print_list(Element* list){
+void print_list(const Element* list){
     if(list!=0){
         Element* temp = list;
         while(temp!=NULL){
@@ -71,7 +68,7 @@ void print_list(Element* list){
     }
 }
 
-void print_list2(Element* l){
+void print_list2(const Element* l){
     Element* buffer = NULL;
     buffer = l;
 
@@ -83,7 +80,7 @@ void print_list2(Element* l){
     printf("NULL\n");
 }
 
-Element* create_list(char c, int n)
+Element* create_list(const char c,const int n)
 {
     if(n <= 0) {
         return NULL;
@@ -105,14 +102,14 @@ void free_list(Element* l)
 
 ///***********************Element_n******************
 
-Element_n* create_element_n(char c, int oc){
+Element_n* create_element_n(const char c,const int oc){
     Element_n* new_e = (Element_n*)malloc(sizeof(Element_n));
     new_e->data = create_node(c,oc);
     new_e->next = NULL;
     return new_e;
 }
 
-void print_list_n(Element_n* l){
+void print_list_n(const Element_n* l){
     Element_n* buffer = l;
 
     while(buffer != NULL)
@@ -145,7 +142,7 @@ Element_n* element_to_element_n(Element* l){
 
 }
 
-Element_n* create_list_n(char c, int n)
+Element_n* create_list_n(char c,int n)
 {
     if(n <= 0) {
         return NULL;
@@ -227,7 +224,7 @@ Dictionary* create_dictionary(int size){
 }
 
 
-void print_dictionary(Dictionary* d){
+void print_dictionary(const Dictionary* d){
     int i;
     if (d != NULL) {
         printf("\nDictionary : \n");
@@ -251,7 +248,7 @@ void free_dictionary(Dictionary* d){
     }
 }
 
-void print_tree_AVL(Node_AVL*tree)
+void print_tree_AVL(const Node_AVL*tree)
 {
     if(tree != NULL)
     {
@@ -260,4 +257,12 @@ void print_tree_AVL(Node_AVL*tree)
         print_tree_AVL(tree->right);
     }
 
+}
+
+
+void print_Tab_of_DoubleNode(const Node* tab,const int n){
+    int indexe = 0;
+    for (indexe = 0; indexe<n ; indexe++){
+        printf("\n%c : %d", tab[indexe].letter, tab[indexe].occ);
+    }
 }

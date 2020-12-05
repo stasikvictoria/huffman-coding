@@ -3,6 +3,7 @@
  * \brief  Header to create the Huffman tree optimised.
  * 
  * \author Astryd CASIMIR astryd.casimirgressier@gmail.com
+ * \author Amélie SENAUX am.senaux@gmail.com
  * \date   December 2020
  *********************************************************************/
 #ifndef HUFFMANCODING_CREATEHUFFMANTREE_H
@@ -20,7 +21,22 @@ Node* add_by_dichtomie_v2(const char* my_fic,int* len);
 void swap(Node** a, Node** b);
 void quick_sorting (Node* tab, int first, int last);
 
+/*
+* \brief Function to compare the occurrence of first element of two queues.
+* \param q1 the first queue.
+* \param q2 the second queue.
+* \return 0 if q1 and q2 are NULL.
+* \return 1 if the coccurance of the first of q1 is the smalest 
+* \return 2 if the coccurance of the first of q2 is the smalest 
+*/
 int compare_queue(const Queue* q1,const Queue* q2);
+
+/*
+* \brief Function to create a Huffman tree from an array of node sorted by occurrence.
+* \param tab the tab of node sorted by occurrence.
+* \param taille the size of the tab.
+* \return the first  node of the Huffman tree.
+*/
 Node* create_Huff_tree_from_tab(const Node* tab,const int taille);
 
 #endif //HUFFMANCODING_CREATEHUFFMANTREE_H

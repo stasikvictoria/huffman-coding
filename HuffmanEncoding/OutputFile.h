@@ -22,7 +22,7 @@ void txt_to_text(const char* file_name,const char* text,const int size_text);
 
 /**
  * \brief Function that compresses a texte file.
- * \param input, the file that wewant to traduct.
+ * \param input, the file that we want to traduct.
  * \param dico, the file who contains the dictionary of Huffman.
  * \param output, the file with the compresses file.
  */

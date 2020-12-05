@@ -92,3 +92,4 @@ void write_AVL_in_dico(const Node_AVL* tree,const char* dico);
 
 
 #endif //HUFFMANCODING_DICTIONARY_H
+

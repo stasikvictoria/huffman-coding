@@ -1,7 +1,5 @@
 #ifndef HUFFMANCODING_ENCODINGFILEOP_H
 #define HUFFMANCODING_ENCODINGFILEOP_H
-
-#include "../DataTypes/DataTypes.h"
 #include "../HuffmanEncoding/EncodingFile.h"
 
 char* copy2(const char* chaine);

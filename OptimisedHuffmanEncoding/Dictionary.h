@@ -7,7 +7,6 @@
  *********************************************************************/
 #ifndef HUFFMANCODING_DICTIONARY_H
 #define HUFFMANCODING_DICTIONARY_H
-#include "../DataTypes/DataTypes.h"
 #include "../HuffmanEncoding/EncodingFile.h"
 
 /**

@@ -1,7 +1,6 @@
 
 #ifndef HUFFMANCODING_DICTIONARY_H
 #define HUFFMANCODING_DICTIONARY_H
-#include "../DataTypes/DataTypes.h"
 #include "../HuffmanEncoding/EncodingFile.h"
 
 void add_node_BST(Node_AVL** tree,const char letter,const int* code,int code_index);

@@ -25,9 +25,17 @@ char* open_file(const char* file ,const  char c ) {
         printf("\nError to open dico");
     else{
         while(fgets(chaine,MAX_SIZE,fich)!=NULL){
-            if( (int)chaine[0] == (int)c ){
-                if(chaine[strlen(chaine)-1]=='\n'){
-                    chaine[strlen(chaine)-1]='\0';
+            if((int)c == 58){  // cas spécial du :
+                 if(chaine[0]== ':' && chaine[1]== ':'){
+                      if(chaine[strlen(chaine)-1]=='\n'){
+                           chaine[strlen(chaine)-1]='\0';
+                          }
+                    result = copy(chaine);
+                }
+            }                     
+           else if((int)chaine[0] == (int)c){
+               if(chaine[strlen(chaine)-1]=='\n'){
+                  chaine[strlen(chaine)-1]='\0';
                 }
                 result = copy(chaine);
             }

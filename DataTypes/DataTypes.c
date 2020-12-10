@@ -147,7 +147,7 @@ void free_list_n(Element_n* l)
 ///******************Queue*****************
 
 Queue* create_queue(){
-    Queue* q =malloc(sizeof(Queue*));
+    Queue* q =malloc(sizeof(Queue));
     q->first=NULL;
     return q;
 }
